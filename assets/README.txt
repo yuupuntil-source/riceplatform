@@ -1,0 +1,1 @@
+Place ricedb-logo.png and ricedb-icon.png here.

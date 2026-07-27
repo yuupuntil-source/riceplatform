@@ -1,286 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rice Platform — open-source AI, operating systems, programming languages, cloud, and developer tools." />
-  <meta name="theme-color" content="#0a3b8f" />
-  <title>Rice Platform</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RiceDB | Rice Platform</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Rice Platform home">
-      <span class="brand-name">Rice</span>
-      <span class="brand-subtitle">Powered by<br>Rice Foundation</span>
-    </a>
+<header class="hero">
+<nav>
+<div class="logo">RiceDB™</div>
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#support">Support Us</a></li>
+</ul>
+</nav>
+<div class="hero-content">
+<h1>Simple SQLite.<br>Modern Python.</h1>
+<p>A simple and secure Python database package built on SQLite.</p>
+<button id="copyBtn">Copy: pip install ricedb</button>
+</div>
+</header>
 
-    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+<section id="features" class="section">
+<h2>Features</h2>
+<div class="cards">
+<div class="card"><h3>SQLite</h3><p>No server required.</p></div>
+<div class="card"><h3>Safe</h3><p>Parameterized queries.</p></div>
+<div class="card"><h3>Lightweight</h3><p>Easy to learn.</p></div>
+</div>
+</section>
 
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a class="active" href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#download">Download</a>
-      <a href="#docs">Documentation</a>
-      <a href="#community">Community</a>
-      <a href="#support">Support Us</a>
-      <a href="#news">News</a>
-    </nav>
+<section id="api" class="section">
+<h2>Main API</h2>
+<pre>create_table()
+insert()
+read()
+update()
+delete()
+count()
+exists()
+list_tables()</pre>
+</section>
 
-    <div class="header-actions">
-      <button id="themeButton" class="icon-button" type="button" aria-label="Toggle dark mode">◐</button>
-      <a class="button button-outline button-small" href="#login">Login</a>
-      <a class="button button-primary button-small" href="#download">Download</a>
-    </div>
-  </header>
+<section id="support" class="section support">
+<h2>Support Us</h2>
+<p>If you like RiceDB, please support Rice Platform.</p>
+<a class="button" href="https://riceplatform.org">Visit Rice Platform</a>
+</section>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="stars"></div>
-      <div class="earth-glow"></div>
-      <div class="hero-content">
-        <p class="eyebrow">OPEN SOURCE • BUILT FOR EVERYONE</p>
-        <h1>Rice Platform</h1>
-        <h2>Open Platform for <span>Everyone</span></h2>
-        <p class="hero-copy">
-          Building the future with open source.<br>
-          AI • OS • Programming • Cloud • Database
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary button-large" href="#download">↓ Download Now</a>
-          <a class="button button-ghost button-large" href="#products">✦ Get Started</a>
-        </div>
-      </div>
-
-      <aside class="mission-card">
-        <h3>Our Mission</h3>
-        <p>
-          Rice Foundation is an independent non-profit initiative dedicated to
-          creating open-source technologies that empower developers,
-          organizations, and individuals worldwide.
-        </p>
-        <a href="#about">Learn more about us →</a>
-      </aside>
-    </section>
-
-    <section id="products" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">ONE ECOSYSTEM</p>
-        <h2>Our Products</h2>
-      </div>
-
-      <div class="product-grid">
-        <article class="product-card">
-          <div class="product-icon purple">◉</div>
-          <h3>Rice AI</h3>
-          <p>AI platform for research, development, and deployment.</p>
-          <a href="/ai">Learn more →</a>
-        </article>
-
-        <article class="product-card">
-          <div class="product-icon blue">OS</div>
-          <h3>RiceOS  coming soon</h3>
-          <p>Lightweight, secure, and modern operating system.</p>
-          <a href="/os">Learn more →</a>
-        </article>
-
-        <article class="product-card">
-          <div class="product-icon green">&lt;/&gt;</div>
-          <h3>Rice Language</h3>
-          <p>Easy to learn, powerful, and open programming language.</p>
-          <a href="/language">Learn more →</a>
-        </article>
-
-        <article class="product-card">
-          <div class="product-icon orange">☁</div>
-          <h3>Rice Drive</h3>
-          <p>Secure cloud storage and file collaboration platform.</p>
-          <a href="/drive">Learn more →</a>
-        </article>
-
-        <article class="product-card">
-          <div class="product-icon cyan">DB</div>
-          <h3>RiceDB</h3>
-          <p>High-performance embedded and cloud database.</p>
-          <a href="/db">Learn more →</a>
-        </article>
-
-        <article class="product-card">
-          <div class="product-icon blue">☁</div>
-          <h3>Rice Cloud</h3>
-          <p>Cloud infrastructure for applications and services.</p>
-          <a href="/cloud">Learn more →</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section lower-grid">
-      <article id="download" class="panel">
-        <div class="panel-title">
-          <span>⇩</span>
-          <div>
-            <h2>Download</h2>
-            <p>Get Rice Platform for your system.</p>
-          </div>
-        </div>
-
-        <div class="download-list">
-          <a href="#"><span>⊞ Windows</span><strong>64-bit / 32-bit</strong></a>
-          <a href="#"><span>● macOS</span><strong>Intel / Apple Silicon</strong></a>
-          <a href="#"><span>♙ Linux</span><strong>Debian / Ubuntu / Others</strong></a>
-          <a href="#"><span>&lt;&gt; Source Code</span><strong>GitHub Repository</strong></a>
-        </div>
-
-        <a class="panel-link" href="/download">View all downloads →</a>
-      </article>
-
-      <article id="news" class="panel">
-        <div class="panel-title">
-          <span>▣</span>
-          <div>
-            <h2>Latest News</h2>
-            <p>Updates from the Rice ecosystem.</p>
-          </div>
-        </div>
-
-        <div class="news-list">
-          <a href="#">
-            <span class="news-thumb">V1</span>
-            <span><strong>Rice Platform V1.0 Released</strong><small>The first stable release is here.</small></span>
-            <time>2026-07-23</time>
-          </a>
-          <a href="#">
-            <span class="news-thumb">AI</span>
-            <span><strong>Rice AI Alpha Program</strong><small>Join the alpha and shape the future.</small></span>
-            <time>2026-07-18</time>
-          </a>
-          <a href="#">
-            <span class="news-thumb">OS</span>
-            <span><strong>RiceOS(coming soon) </strong><small>coming soon</small></span>
-            <time>2026-07-12</time>
-          </a>
-          <a href="#">
-            <span class="news-thumb">RL</span>
-            <span><strong>Rice Language Preview</strong><small>First public preview is available.</small></span>
-            <time>2026-07-05</time>
-          </a>
-        </div>
-
-        <a class="panel-link" href="/news">View all news →</a>
-      </article>
-
-      <article id="support" class="panel support-panel">
-        <div class="panel-title">
-          <span>♥</span>
-          <div>
-            <h2>Support Rice Foundation</h2>
-            <p>Your support helps us build open source for everyone.</p>
-          </div>
-        </div>
-
-        <form id="donationForm" class="donation-form">
-          <div class="donation-row">
-            <label>
-              <span class="sr-only">Amount</span>
-              <input id="amount" type="number" min="1" step="1" value="10" />
-            </label>
-            <label>
-              <span class="sr-only">Currency</span>
-              <select id="currency">
-                <option>USD</option>
-                <option>TWD</option>
-                <option>EUR</option>
-                <option>JPY</option>
-              </select>
-            </label>
-          </div>
-
-          <button class="donate paypal" type="submit">Donate with PayPal</button>
-          <button class="donate card" type="button">▣ Donate with Card</button>
-
-          <div class="wallet-row">
-            <button type="button"> Pay</button>
-            <button type="button">G Pay</button>
-          </div>
-        </form>
-
-        <p id="donationMessage" class="donation-message" aria-live="polite"></p>
-        <a class="panel-link" href="/support">Other donation methods →</a>
-      </article>
-    </section>
-
-    <section id="docs" class="section cta-section">
-      <div>
-        <p class="eyebrow">START BUILDING</p>
-        <h2>Documentation for every Rice product</h2>
-        <p>Installation guides, API references, tutorials, CLI documentation, and development roadmaps.</p>
-      </div>
-      <a class="button button-primary button-large" href="/docs">Open Documentation</a>
-    </section>
-
-    <section id="community" class="section community-section">
-      <div class="section-heading">
-        <p class="eyebrow">BUILD TOGETHER</p>
-        <h2>Join the Rice Community</h2>
-      </div>
-      <div class="community-grid">
-        <a href="#">GitHub</a>
-        <a href="#">Forum</a>
-        <a href="#">Discord</a>
-        <a href="#">Contributors</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-brand">
-      <strong>Rice</strong>
-      <span>Powered by Rice Foundation</span>
-      <small>© 2026 Rice Foundation. All rights reserved.</small>
-    </div>
-
-    <div class="footer-column">
-      <h3>Products</h3>
-      <a href="/ai">Rice AI</a>
-      <a href="/os">RiceOS</a>
-      <a href="/language">Rice Language</a>
-      <a href="/drive">Rice Drive</a>
-      <a href="/db">RiceDB</a>
-    </div>
-
-    <div class="footer-column">
-      <h3>Resources</h3>
-      <a href="/docs">Documentation</a>
-      <a href="#">Tutorials</a>
-      <a href="#">API Reference</a>
-      <a href="/news">Blog</a>
-    </div>
-
-    <div class="footer-column">
-      <h3>Foundation</h3>
-      <a href="/about">About Us</a>
-      <a href="#">Our Mission</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-    </div>
-
-    <div class="footer-column">
-      <h3>Follow Us</h3>
-      <div class="socials">
-        <a href="#" aria-label="GitHub">GH</a>
-        <a href="#" aria-label="Discord">DC</a>
-        <a href="#" aria-label="YouTube">YT</a>
-      </div>
-      <select aria-label="Language">
-        <option>English</option>
-        <option>繁體中文</option>
-      </select>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+<footer>© Rice Platform · GPL-3.0 · Author: HONG-CHI WU</footer>
+<script src="js/main.js"></script>
 </body>
 </html>
