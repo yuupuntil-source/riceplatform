@@ -1,1 +1,0 @@
-document.getElementById('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText('pip install ricedb');alert('Copied!')}catch(e){alert('pip install ricedb')}}
