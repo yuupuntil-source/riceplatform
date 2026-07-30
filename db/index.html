@@ -34,148 +34,360 @@
 
 <section id="api" class="section">
 <h2>Main API</h2>
-<pre>RiceDB API Documentation
+<pre># RiceDB™
 
-Database()
+A simple and secure Python database package built on SQLite.
 
-Overview
+RiceDB is a lightweight Python package that simplifies SQLite database operations.
+Instead of writing SQL for common tasks, you can use a clean and easy-to-read Python API.
 
-The Database class is the entry point of every RiceDB application.
+RiceDB is designed for beginners, students, hobbyists, and developers who want a simple database solution without setting up a database server.
 
-It manages the connection between your Python program and the SQLite
-database. Every database operation begins by creating a Database object.
+---
 
-If the specified database file does not exist, RiceDB automatically
-creates it. No additional setup or database server is required.
+## Features
 
-A single Database object can be be used to create tables, insert
-records, update existing data, delete records, execute SQL statements,
-and manage the entire database.
+- Simple and readable Python API
+- Built on SQLite
+- No external database server required
+- Lightweight and easy to use
+- Safe parameterized queries
+- Automatic table management
+- Cross-platform
+- Open source
 
-Parameters
+---
 
-database
+## Installation
 
-Type
+bash
+pip install ricedb
 
-String
+---
 
-Description
+## Quick Start
 
-The filename or path of the SQLite database.
+python
+from ricedb import Database
 
-Example
+db = Database("school.db")
 
-students.db
+db.create_table(
+    "students",
+    {
+        "id": "id",
+        "name": "str",
+        "age": "int",
+        "active": "bool",
+        "created_at": "timenow",
+    }
+)
+
+db.insert(
+    "students",
+    {
+        "name": "Amy",
+        "age": 16,
+        "active": True,
+    }
+)
+
+rows = db.read("students")
+
+print(rows)
+
+db.close()
+
+---
+
+## Supported Data Types
+
+| RiceDB Type | SQLite Type |
+|--------------|-------------|
+| id | INTEGER PRIMARY KEY AUTOINCREMENT |
+| int | INTEGER |
+| float | REAL |
+| str | TEXT |
+| bool | INTEGER |
+| bytes | BLOB |
+| datetime | TEXT |
+| timenow | CURRENT_TIMESTAMP |
+
+---
+
+## Main API
+
+### Database
+
+python
+db = Database("example.db")
+
+---
+
+### Create Table
+
+python
+db.create_table(
+    "users",
+    {
+        "id": "id",
+        "name": "str",
+        "age": "int"
+    }
+)
+
+---
+
+### Insert Data
+
+python
+db.insert(
+    "users",
+    {
+        "name": "Alice",
+        "age": 20
+    }
+)
+
+---
+
+### Read Data
+
+python
+db.read("users")
+
+Read with conditions
+
+python
+db.read(
+    "users",
+    where={
+        "age":20
+    }
+)
+
+---
+
+### Get One Record
+
+python
+db.get(
+    "users",
+    where={
+        "id":1
+    }
+)
+
+Returns one dictionary or `None`.
+
+---
+
+### Update Data
+
+python
+db.update(
+    "users",
+    {
+        "age":21
+    },
+    where={
+        "id":1
+    }
+)
+
+---
+
+### Delete Data
+
+python
+db.delete(
+    "users",
+    where={
+        "id":1
+    }
+)
+
+---
+
+### Count Records
+
+python
+db.count("users")
+
+---
+
+### Check Record Exists
+
+python
+db.exists(
+    "users",
+    where={
+        "name":"Alice"
+    }
+)
 
 Returns
 
-Returns a Database object.
+python
+True
 
-The returned object provides access to every RiceDB API.
+or
 
-Example
+python
+False
 
-from ricedb import Database
+---
 
-db = Database(“students.db”)
+### Create Column
 
-Notes
-
-RiceDB automatically creates the database file if it does not exist.
-
-SQLite is included with Python, so no additional software installation
-is required.
-
-One Database object is sufficient for most applications.
-
-create_table()
-
-Overview
-
-Creates a new table inside the current database.
-
-A table contains one or more columns. Each column is defined using a
-Python dictionary. The dictionary key represents the column name, while
-the dictionary value represents the RiceDB data type.
-
-If a table with the same name already exists, RiceDB raises an exception
-instead of replacing the existing table.
-
-Parameters
-
-table_name
-
-Type
-
-String
-
-Description
-
-The name of the table to create.
-
-columns
-
-Type
-
-Dictionary
-
-Description
-
-A collection of column definitions.
-
-Each key is a column name.
-
-Each value is a RiceDB data type.
-
-Example
-
-db.create_table(
-
-“students”,
-
-{
-
-“id”:“id”,
-
-“name”:“str”,
-
-“age”:“int”,
-
-“score”:“float”,
-
-“created”:“timenow”
-
-}
-
+python
+db.create_column(
+    "users",
+    "email",
+    "str"
 )
 
-Description
+---
 
-The example above creates a table named students.
+### Delete Column
 
-The id column becomes an auto-increment primary key.
+python
+db.delete_column(
+    "users",
+    "email"
+)
 
-The name column stores text values.
+---
 
-The age column stores integer values.
+### Rename Column
 
-The score column stores floating-point numbers.
+python
+db.rename_column(
+    "users",
+    "name",
+    "full_name"
+)
 
-The created column automatically stores the current date and time
-whenever a new record is inserted.
+---
 
-insert()
+### Rename Table
 
-Overview
+python
+db.rename_table(
+    "users",
+    "members"
+)
 
-Adds a new record to an existing table.
+---
 
-Only the columns provided in the dictionary will be inserted. Any
-remaining columns will use their default values or NULL.
+### Clear Table
 
-RiceDB automatically uses parameterized SQL statements to improve
-security and reduce the risk of SQL injection attacks.
+python
+db.clear_table("members")
+
+---
+
+### List Tables
+
+python
+db.list_tables()
+
+---
+
+### List Columns
+
+python
+db.list_columns("members")
+
+---
+
+### Table Information
+
+python
+db.table_info("members")
+
+---
+
+### Execute SQL
+
+python
+db.execute(
+    "SELECT * FROM members"
+)
+
+---
+
+### Close Database
+
+python
+db.close()
+
+---
+
+## Example
+
+python
+from ricedb import Database
+
+db = Database("example.db")
+
+db.create_table(
+    "students",
+    {
+        "id":"id",
+        "name":"str",
+        "score":"float"
+    }
+)
+
+db.insert(
+    "students",
+    {
+        "name":"Amy",
+        "score":95.5
+    }
+)
+
+print(db.read("students"))
+
+db.close()
+
+---
+
+## Requirements
+
+- Python 3.9+
+- SQLite (built into Python)
+
+---
+
+## Project Website
+
+https://riceplatform.org/db
+
+---
+
+## Source Code
+
+https://github.com/RicePlatform/RiceDB
+
+---
+
+## License
+
+RiceDB is licensed under the GNU General Public License v3.0 (GPL-3.0).
+
+See the LICENSE file for details.
+
+---
+
+## Author
+
+HONG-CHI WU
+
+---
+
+© Rice Platform
 </pre>
 </section>
 
