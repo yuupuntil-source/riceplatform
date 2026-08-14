@@ -1,1 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Your Dream for I.C.</title>
+
+  <style>
+    /* =========================
+       基本設定
+    ========================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #18202a;
+      --sub-text: #687385;
+      --border: #e1e6ee;
+      --primary: #315efb;
+      --primary-hover: #2449c9;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+      --radius: 18px;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       頂部導覽
+    ========================== */
+    .navbar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .language-select {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: white;
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-button {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .nav-button:hover {
+      background: var(--primary-hover);
+    }
+
+    /* =========================
+       主要內容
+    ========================== */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* =========================
+       Title / Info 區域
+    ========================== */
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+
+      padding: 42px;
+      margin-bottom: 32px;
+
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .hero-info {
+      color: var(--sub-text);
+      max-width: 720px;
+      font-size: 17px;
+    }
+
+    .hero-info strong {
+      color: var(--text);
+    }
+
+    /* =========================
+       ICO 方塊
+    ========================== */
+    .ico-box {
+      width: 150px;
+      height: 150px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 2px solid var(--text);
+      border-radius: 24px;
+
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 2px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(49, 94, 251, 0.08),
+          rgba(49, 94, 251, 0)
+        );
+    }
+
+    /* =========================
+       商品區域
+    ========================== */
+    .section-title {
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .section-title p {
+      color: var(--sub-text);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      height: 170px;
+      background: #eef1f6;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 模擬晶片圖示 */
+    .chip {
+      width: 86px;
+      height: 86px;
+      background: #202631;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+    }
+
+    .chip::before,
+    .chip::after {
+      content: "";
+      position: absolute;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 6px,
+        #7a8493 6px,
+        #7a8493 10px
+      );
+      width: 12px;
+      height: 70px;
+      top: 8px;
+    }
+
+    .chip::before {
+      left: -12px;
+    }
+
+    .chip::after {
+      right: -12px;
+    }
+
+    .chip-center {
+      position: absolute;
+      inset: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #657080;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 4px;
+    }
+
+    .product-content {
+      padding: 18px;
+    }
+
+    .product-type {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .product-description {
+      min-height: 46px;
+      color: var(--sub-text);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .buy-button {
+      border: 0;
+      color: white;
+      background: var(--primary);
+      border-radius: 9px;
+      padding: 8px 13px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .buy-button:hover {
+      background: var(--primary-hover);
+    }
+
+    /* =========================
+       功能需求 / Notes
+    ========================== */
+    .features {
+      margin-top: 36px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .features h2 {
+      margin-bottom: 18px;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      padding: 18px;
+      background: #f7f8fc;
+      border-radius: 12px;
+
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .feature-number {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .feature p {
+      color: var(--sub-text);
+      font-size: 14px;
+    }
+
+    /* =========================
+       Payment
+    ========================== */
+    .payment {
+      margin-top: 24px;
+      padding: 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      background: #101522;
+      color: white;
+      border-radius: 16px;
+    }
+
+    .payment p {
+      color: #bbc3d0;
+      font-size: 14px;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .payment-badge {
+      border: 1px solid #414a5b;
+      background: #202735;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       Footer
+    ========================== */
+    footer {
+      text-align: center;
+      color: var(--sub-text);
+      padding: 34px 20px;
+      font-size: 14px;
+    }
+
+    /* =========================
+       手機 Responsive
+    ========================== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .ico-box {
+        width: 120px;
+        height: 120px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar-inner {
+        padding: 14px 16px;
+      }
+
+      .container {
+        padding: 24px 16px 40px;
+      }
+
+      .hero {
+        padding: 26px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .product-grid,
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      .payment {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .language-select {
+        max-width: 105px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       Navigation
+  ========================== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+
+      <div class="logo">
+        IP's for I.C.'s
+      </div>
+
+      <div class="nav-right">
+        <!-- 中文 / English 切換 -->
+        <select class="language-select" id="languageSelect">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
+
+        <button class="nav-button">
+          My Account
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <main class="container">
+
+    <!-- =========================
+         Title + Info + ICO
+    ========================== -->
+    <section class="hero">
+
+      <div>
+        <span class="hero-label">
+          IP's for I.C.'s
+        </span>
+
+        <h1 id="mainTitle">
+          Your Dream for I.C.
+        </h1>
+
+        <p class="hero-info" id="mainInfo">
+          <strong>Create your IC</strong> starting from buying your IP.
+          Designed for IC designers and the IC business.
+        </p>
+      </div>
+
+      <div class="ico-box">
+        ICO
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         Product / IP 商品
+    ========================== -->
+    <section>
+
+      <div class="section-title">
+        <h2 id="productTitle">
+          Explore IC IP
+        </h2>
+
+        <p id="productSubtitle">
+          Find the IP you need and start creating your IC.
+        </p>
+      </div>
+
+
+      <div class="product-grid">
+
+        <!-- Product 1 -->
+        <article class="product-card">
+
+          <div class="product-image">
+            <div class="chip">
+              <div class="chip-center">
+                CPU
+              </div>
+            </div>
+          </div>
+
+          <div class="product-content">
+
+            <div class="product-type">
+              PROCESSOR IP
+            </div>
+
+            <h3 class="product-name">
+              RISC Core IP
+            </h3>
+
+            <p class="product-description">
+              High-performance processor IP designed for modern IC systems.
+            </p>
+
+            <div class="product-bottom">
+              <span class="price">
+                $299
+              </span>
+
+              <button class="buy-button">
+                Buy IP
+              </button>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- Product 2 -->
+        <article class="product-card">
+
+          <div class="product-image">
+            <div class="chip">
+              <div class="chip-center">
+                DSP
+              </div>
+            </div>
+          </div>
+
+          <div class="product-content">
+
+            <div class="product-type">
+              DSP IP
+            </div>
+
+            <h3 class="product-name">
+              Signal DSP Core
+            </h3>
+
+            <p class="product-description">
+              Digital signal processing IP for embedded and communication ICs.
+            </p>
+
+            <div class="product-bottom">
+              <span class="price">
+                $249
+              </span>
+
+              <button class="buy-button">
+                Buy IP
+              </button>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- Product 3 -->
+        <article class="product-card">
+
+          <div class="product-image">
+            <div class="chip">
+              <div class="chip-center">
+                AI
+              </div>
+            </div>
+          </div>
+
+          <div class="product-content">
+
+            <div class="product-type">
+              AI IP
+            </div>
+
+            <h3 class="product-name">
+              AI Accelerator
+            </h3>
+
+            <p class="product-description">
+              Neural-network acceleration IP for AI and edge computing.
+            </p>
+
+            <div class="product-bottom">
+              <span class="price">
+                $399
+              </span>
+
+              <button class="buy-button">
+                Buy IP
+              </button>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- Product 4 -->
+        <article class="product-card">
+
+          <div class="product-image">
+            <div class="chip">
+              <div class="chip-center">
+                IO
+              </div>
+            </div>
+          </div>
+
+          <div class="product-content">
+
+            <div class="product-type">
+              INTERFACE IP
+            </div>
+
+            <h3 class="product-name">
+              High-Speed I/O
+            </h3>
+
+            <p class="product-description">
+              High-speed interface IP for IC communication and connectivity.
+            </p>
+
+            <div class="product-bottom">
+              <span class="price">
+                $199
+              </span>
+
+              <button class="buy-button">
+                Buy IP
+              </button>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         手稿右側功能需求
+    ========================== -->
+    <section class="features">
+
+      <h2 id="featureTitle">
+        Platform Features
+      </h2>
+
+      <div class="feature-list">
+
+        <div class="feature">
+          <span class="feature-number">
+            1
+          </span>
+
+          <div>
+            <h3>中文 / English</h3>
+            <p>
+              支援自動或手動切換中文與英文介面。
+            </p>
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <span class="feature-number">
+            2
+          </span>
+
+          <div>
+            <h3>簡單介面</h3>
+            <p>
+              使用乾淨、直覺、容易理解的商品瀏覽介面。
+            </p>
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <span class="feature-number">
+            3
+          </span>
+
+          <div>
+            <h3>ICO / Image Search</h3>
+            <p>
+              ICO 可自動尋找相同資料夾或商品相關的圖片。
+            </p>
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <span class="feature-number">
+            4
+          </span>
+
+          <div>
+            <h3>FastAPI</h3>
+            <p>
+              商品資料可由伺服器透過 FastAPI API 取得。
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Payment -->
+      <div class="payment">
+
+        <div>
+          <strong id="paymentTitle">
+            Payment Methods
+          </strong>
+
+          <p id="paymentInfo">
+            Secure payment for your IC IP purchase.
+          </p>
+        </div>
+
+        <div class="payment-methods">
+          <span class="payment-badge">
+            💳 Credit Card
+          </span>
+
+          <span class="payment-badge">
+            PayPal
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    © 2026 IP's for I.C.'s — Your Dream for I.C.
+  </footer>
+
+
+  <!-- =========================
+       JavaScript
+       中英文切換示範
+  ========================== -->
+  <script>
+    const languageSelect = document.getElementById("languageSelect");
+
+    const text = {
+      en: {
+        mainTitle: "Your Dream for I.C.",
+        mainInfo:
+          "<strong>Create your IC</strong> starting from buying your IP. Designed for IC designers and the IC business.",
+
+        productTitle: "Explore IC IP",
+        productSubtitle:
+          "Find the IP you need and start creating your IC.",
+
+        featureTitle: "Platform Features",
+
+        paymentTitle: "Payment Methods",
+        paymentInfo:
+          "Secure payment for your IC IP purchase."
+      },
+
+      zh: {
+        mainTitle: "打造你的夢想 IC",
+        mainInfo:
+          "<strong>從購買 IP 開始打造你的 IC。</strong> 專為 IC 設計者以及 IC 產業打造。",
+
+        productTitle: "探索 IC IP",
+        productSubtitle:
+          "尋找你需要的 IP，開始建立你的 IC。",
+
+        featureTitle: "平台功能",
+
+        paymentTitle: "付款方式",
+        paymentInfo:
+          "安全、方便地購買你的 IC IP。"
+      }
+    };
+
+
+    languageSelect.addEventListener("change", function () {
+      const lang = this.value;
+      const content = text[lang];
+
+      document.getElementById("mainTitle").textContent =
+        content.mainTitle;
+
+      document.getElementById("mainInfo").innerHTML =
+        content.mainInfo;
+
+      document.getElementById("productTitle").textContent =
+        content.productTitle;
+
+      document.getElementById("productSubtitle").textContent =
+        content.productSubtitle;
+
+      document.getElementById("featureTitle").textContent =
+        content.featureTitle;
+
+      document.getElementById("paymentTitle").textContent =
+        content.paymentTitle;
+
+      document.getElementById("paymentInfo").textContent =
+        content.paymentInfo;
+    });
+  </script>
+
+</body>
+</html>
